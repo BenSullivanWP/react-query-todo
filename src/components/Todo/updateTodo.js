@@ -1,9 +1,12 @@
-export const updateTodo = async (id) => {
-    const data = await fetch(`https://dummyjson.com/todos/${id}`, {
-        headers: {'Content-Type': 'application/json',
-            body: JSON.stringify({}) // TODO: This actually needs to update the todo
-        }
+export const updateTodo = async (todo) => {
+    console.log(todo)
+    const data = await fetch(`https://dummyjson.com/todos/${todo.id}`, {
+        method: 'PUT', /* or PATCH */
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            completed: todo.completed,
+        })
     })
-    const todo = await data.json()
-    return todo
+    const new_todo = await data.json()
+    return new_todo
 }

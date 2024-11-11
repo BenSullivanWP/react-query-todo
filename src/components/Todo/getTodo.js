@@ -1,4 +1,4 @@
-export const getTodo = async (id: string) => {
+export const getTodo = async (id) => {
     const data = await fetch(`https://dummyjson.com/todos/${id}`)
     const todo = await data.json()
     return todo

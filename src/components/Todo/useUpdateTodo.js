@@ -1,9 +1,19 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { updateTodo } from "./updateTodo"
 
+
 const useUpdateTodo = () => {
-    // The Variable is the ID
-    return useMutation({ mutationFn: updateTodo, onSuccess: (data, variable) => console.log(data, variable) })
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: updateTodo,
+        onSuccess: (incoming_data) => {
+            queryClient.setQueryData(['todos'], (data) => {
+                data.splice(incoming_data.id - 1, 1, incoming_data)
+                return data
+            })
+        }
+    })
 }
 
 export default useUpdateTodo
