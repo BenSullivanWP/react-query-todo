@@ -1,5 +1,6 @@
 export const getUserTodos = async (id) => {
-    const data = await fetch(`https://dummyjson.com/todos/user/${id}`)
-    const todo = await data.json()
-    return todo
+    // // TODO: make a users end point in json-server
+    // const data = await fetch(`https://localhost:3001/todos/user/${id}`)
+    // const todo = await data.json()
+    // return todo
 }

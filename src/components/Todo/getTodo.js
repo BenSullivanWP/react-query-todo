@@ -1,5 +1,5 @@
 export const getTodo = async (id) => {
-    const data = await fetch(`https://dummyjson.com/todos/${id}`)
+    const data = await fetch(`http://localhost:3001/todos/${id}`)
     const todo = await data.json()
     return todo
 }

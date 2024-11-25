@@ -12,6 +12,7 @@ export default function Todo({ todo }) {
             }
             <FormControlLabel
                 control={<Checkbox defaultChecked={todo.completed} onChange={(event) => {
+                    console.log("Completed value: ", event.target.value)
                     todo = {...todo, completed: event.target.value == "on" }
                     mutateTodo(todo)
                 }} />}
