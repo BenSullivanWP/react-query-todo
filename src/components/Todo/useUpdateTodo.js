@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { updateTodo } from "./updateTodo"
 
 
@@ -7,11 +7,10 @@ const useUpdateTodo = () => {
 
     return useMutation({
         mutationFn: updateTodo,
-        onSuccess: (incoming_data) => {
-            queryClient.setQueryData(['todos'], (data) => {
-                data.splice(incoming_data.id - 1, 1, incoming_data)
-                return data
-            })
+        onSuccess: (variables) => {
+            // TODO: Might want to take a look at monitoring both of these separately so we're not making a huge call to the index endpoint
+            queryClient.invalidateQueries({ queryKey: ['todos'], exact: true })
+            queryClient.invalidateQueries({ queryKey: ['users', variables.userId] })
         }
     })
 }

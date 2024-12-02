@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query"
-import { getTodos } from "./getTodos"
+import { useEffect } from "react"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import { getTodosPage } from "./getTodosPage"
 import Todo from "../Todo/Todo"
 
 export default function List() {
@@ -8,7 +9,14 @@ export default function List() {
     // TODO: Convert tyhe user list to reach out to the end point for individual Todo IDs
     // TODO: Add pagination to the todo list
     // TODO: infinite queries/scroll for lazy loading of todos
-    const { data: todos, isLoading: todosLoading, isError: todosError } = useQuery({ queryKey: ['todos'], queryFn: getTodos })
+    const { data: todos, isLoading: todosLoading, isError: todosError } = useInfiniteQuery({
+        queryKey: ['todos'],
+        queryFn: () => getTodosPage(1)
+    })
+
+    useEffect(() => {
+        console.log("TODOS: ", todos)
+    }, [todos])
 
     if (todosLoading) return <span>Loading...</span>
     if (todosError) return <span>Errored...</span>
@@ -16,7 +24,7 @@ export default function List() {
     return (
         <>
             {console.log("TODOS LIST: ", todos)}
-            {todos.map(todo => <Todo todo={todo} />)}
+            {todos ? todos?.pages[0]?.map(todo => <Todo key={todo.id} todo={todo} />) : null}
         </>
     )
 }

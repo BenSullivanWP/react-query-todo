@@ -4,18 +4,14 @@ import useUpdateTodo from "./useUpdateTodo"
 export default function Todo({ todo }) {
 
     const { mutate: mutateTodo } = useUpdateTodo()
+    const handleChange = (event) => {
+        mutateTodo({ ...todo, completed: event.target.checked })
+    }
 
     return (
         <div>
-            {
-                // TODO: Update the completed status of the todo item with reactquery
-            }
             <FormControlLabel
-                control={<Checkbox defaultChecked={todo.completed} onChange={(event) => {
-                    console.log("Completed value: ", event.target.value)
-                    todo = {...todo, completed: event.target.value == "on" }
-                    mutateTodo(todo)
-                }} />}
+                control={<Checkbox checked={todo.completed} onChange={handleChange} />}
                 label={todo.todo}
             />
         </div>

@@ -9,13 +9,13 @@
     {
       "id": "2",
       "todo": "Memorize a poem",
-      "completed": true,
+      "completed": false,
       "userId": 13
     },
     {
       "id": "3",
       "todo": "Watch a classic movie",
-      "completed": true,
+      "completed": false,
       "userId": 68
     },
     {
@@ -33,7 +33,7 @@
     {
       "id": "6",
       "todo": "Contribute code or a monetary donation to an open-source software project",
-      "completed": true,
+      "completed": false,
       "userId": 69
     },
     {
@@ -117,7 +117,7 @@
     {
       "id": "20",
       "todo": "Bake a pie with some friends",
-      "completed": false,
+      "completed": true,
       "userId": 162
     },
     {
